@@ -13,9 +13,9 @@ PKG_RELEASE:=1
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/radxa/u-boot
 
-PKG_SOURCE_DATE:=2024-03-01
-PKG_SOURCE_VERSION:=3b2035860d51a75fc70941acf9ae934140991b21
-PKG_MIRROR_HASH:=4cba13e74fff830f946ee52d55c6a94e2de691d45db6cf69c481f91a8063e23f
+PKG_SOURCE_DATE:=2024-10-29
+PKG_SOURCE_VERSION:=27398f1e19628407fabb279034653d23c9369f12
+PKG_MIRROR_HASH:=d0469f6c1f0d561d1495844fff2b50bc42af16fa4e33f5f42f092770a2bb4967
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
@@ -32,6 +32,7 @@ define U-Boot/evb-rk3528
   BUILD_DEVICES:= \
     armsom_sige1 \
     hinlink_opc-h28k \
+    hinlink_opc-h29k \
     hinlink_opc-ht2 \
     radxa_e20c \
     widora_mangopi-m28k \
@@ -43,8 +44,21 @@ define U-Boot/evb-rk3528
   SOC:=rk3528
 endef
 
+define U-Boot/evb-rk3576
+  BUILD_SUBTARGET:=armv8
+  NAME:=RK3576 Evaluation
+  BUILD_DEVICES:= \
+    armsom_sige5
+  DEPENDS:=+PACKAGE_u-boot-evb-rk3576:rkbin-rk3576
+  ATF:=rk3576_bl31_v1.12.elf
+  DDR:=rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.08.bin
+  UBOOT_CONFIG:=rk3576
+  SOC:=rk3576
+endef
+
 UBOOT_TARGETS := \
-  evb-rk3528
+  evb-rk3528 \
+  evb-rk3576
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
