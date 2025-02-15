@@ -9,11 +9,12 @@ define Device/cmiot_ax18
 	$(call Device/FitImage)
 	$(call Device/UbiFit)
 	DEVICE_VENDOR := CMIOT
-	DEVICE_MODEL := AX18
+	DEVICE_MODEL := AX18 (ZN M2)
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@cp03-c1
 	SOC := ipq6000
+	DEVICE_PACKAGES := ipq-wifi-cmiot_ax18
 endef
 TARGET_DEVICES += cmiot_ax18
 
