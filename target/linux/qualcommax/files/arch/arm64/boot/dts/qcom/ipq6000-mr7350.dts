@@ -172,7 +172,94 @@
 		nand-bus-width = <8>;
 
 		partitions {
-			compatible = "qcom,smem-part";
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				label = "0:SBL1";
+				reg = <0x00000000 0x00180000>;
+			};
+
+			partition@180000 {
+				label = "0:MIBIB";
+				reg = <0x00180000 0x00100000>;
+			};
+
+			partition@280000 {
+				label = "0:QSEE";
+				reg = <0x00280000 0x00380000>;
+			};
+
+			partition@600000 {
+				label = "0:DEVCFG";
+				reg = <0x00600000 0x00080000>;
+			};
+
+			partition@680000 {
+				label = "0:RPM";
+				reg = <0x00680000 0x00080000>;
+			};
+
+			partition@700000 {
+				label = "0:CDT";
+				reg = <0x00700000 0x00080000>;
+			};
+
+			partition@780000 {
+				label = "0:APPSBLENV";
+				reg = <0x00780000 0x00080000>;
+			};
+
+			partition@800000 {
+				label = "0:APPSBL";
+				reg = <0x00800000 0x00180000>;
+			};
+
+			partition@980000 {
+				label = "0:ART";
+				reg = <0x00980000 0x00080000>;
+			};
+
+			partition@a00000 {
+				label = "0:WIFIFW";
+				reg = <0x00a00000 0x00900000>;
+			};
+
+			partition@1300000 {
+				label = "0:ETHPHYFW";
+				reg = <0x01300000 0x00080000>;
+			};
+
+			partition@1380000 {
+				label = "u_env";
+				reg = <0x01380000 0x00080000>;
+			};
+
+			partition@1400000 {
+				label = "s_env";
+				reg = <0x01400000 0x00040000>;
+			};
+
+			partition@1440000 {
+				label = "devinfo";
+				reg = <0x01440000 0x00040000>;
+			};
+
+			partition@1480000 {
+				label = "rootfs";
+				reg = <0x01480000 0x0a400000>;
+			};
+
+			partition@be80000 {
+				label = "sysdiag";
+				reg = <0x0be80000 0x00200000>;
+			};
+
+			partition@c080000 {
+				label = "syscfg";
+				reg = <0x0c080000 0x04400000>;
+			};
 		};
 	};
 };
