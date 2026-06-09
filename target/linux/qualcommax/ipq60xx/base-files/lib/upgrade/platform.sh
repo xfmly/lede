@@ -26,8 +26,9 @@ platform_do_upgrade() {
 		mmc_do_upgrade "$1"
 		;;
 	linksys,mr7350)
-	    nand_do_upgrade "$1"
+		nand_do_upgrade "$1"
 		;;
+	*)
 		default_do_upgrade "$1"
 		;;
 	esac
