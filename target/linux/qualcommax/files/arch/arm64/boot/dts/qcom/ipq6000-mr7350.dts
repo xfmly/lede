@@ -24,9 +24,9 @@
 	};
 
 	chosen {
-		stdout-path = "serial0:115200n8";
-		bootargs-append = " root=/dev/ubiblock0_0";
-	};
+    stdout-path = "serial0:115200n8";
+    bootargs-append = " ubi.mtd=rootfs root=/dev/ubiblock0_1";
+    };
 
 	keys {
 		compatible = "gpio-keys";
@@ -167,12 +167,111 @@
 
 	nand@0 {
 		reg = <0>;
+
 		nand-ecc-strength = <4>;
 		nand-ecc-step-size = <512>;
 		nand-bus-width = <8>;
 
 		partitions {
-			compatible = "qcom,smem-part";
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			sbl1@0 {
+				label = "0:SBL1";
+				reg = <0x00000000 0x00180000>;
+				read-only;
+			};
+
+			mibib@180000 {
+				label = "0:MIBIB";
+				reg = <0x00180000 0x00100000>;
+				read-only;
+			};
+
+			qsee@280000 {
+				label = "0:QSEE";
+				reg = <0x00280000 0x00380000>;
+				read-only;
+			};
+
+			devcfg@600000 {
+				label = "0:DEVCFG";
+				reg = <0x00600000 0x00080000>;
+				read-only;
+			};
+
+			rpm@680000 {
+				label = "0:RPM";
+				reg = <0x00680000 0x00080000>;
+				read-only;
+			};
+
+			cdt@700000 {
+				label = "0:CDT";
+				reg = <0x00700000 0x00080000>;
+				read-only;
+			};
+
+			appsblenv@780000 {
+				label = "0:APPSBLENV";
+				reg = <0x00780000 0x00080000>;
+			};
+
+			appsbl@800000 {
+				label = "0:APPSBL";
+				reg = <0x00800000 0x00180000>;
+				read-only;
+			};
+
+			art@980000 {
+				label = "0:ART";
+				reg = <0x00980000 0x00080000>;
+				read-only;
+			};
+
+			wififw@a00000 {
+				label = "0:WIFIFW";
+				reg = <0x00a00000 0x00900000>;
+				read-only;
+			};
+
+			ethphyfw@1300000 {
+				label = "0:ETHPHYFW";
+				reg = <0x01300000 0x00080000>;
+				read-only;
+			};
+
+			uenv@1380000 {
+				label = "u_env";
+				reg = <0x01380000 0x00080000>;
+			};
+
+			senv@1400000 {
+				label = "s_env";
+				reg = <0x01400000 0x00040000>;
+			};
+
+			devinfo@1440000 {
+				label = "devinfo";
+				reg = <0x01440000 0x00040000>;
+				read-only;
+			};
+
+			rootfs@1480000 {
+				label = "rootfs";
+				reg = <0x01480000 0x0a400000>;
+			};
+
+			sysdiag@b880000 {
+				label = "sysdiag";
+				reg = <0x0b880000 0x00200000>;
+			};
+
+			syscfg@ba80000 {
+				label = "syscfg";
+				reg = <0x0ba80000 0x04400000>;
+			};
 		};
 	};
 };
